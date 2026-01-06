@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحميل RT News Intelligence - الإصدار 2.0.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #00d4ff, #ff00ff);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 50px;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00d4ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .version {
+            color: #00ff88;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .fixed-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            color: #000;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-size: 1.1rem;
+        }
+        
+        .downloads {
+            display: grid;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .download-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .download-card:hover {
+            transform: translateY(-5px);
+            border-color: #00d4ff;
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.2);
+        }
+        
+        .download-card.primary {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+        
+        .card-icon.installer {
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+        }
+        
+        .card-icon.source {
+            background: linear-gradient(135deg, #ff00ff, #00d4ff);
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+        
+        .card-size {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .card-description {
+            color: #aaa;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn.primary {
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            color: #000;
+        }
+        
+        .download-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .features-section {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .features-section h2 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .features-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .features-list li {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+        }
+        
+        .feature-text h4 {
+            color: #00d4ff;
+            margin-bottom: 5px;
+        }
+        
+        .feature-text p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .fixes-section {
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .fixes-section h2 {
+            color: #00ff88;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .fixes-list {
+            list-style: none;
+        }
+        
+        .fixes-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .fixes-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .check-icon {
+            color: #00ff88;
+            font-size: 1.2rem;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .instructions h2 {
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+        
+        .instructions ol {
+            padding-right: 20px;
+            line-height: 2;
+            color: #ccc;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .note {
+            background: rgba(255, 200, 0, 0.1);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #ffc800;
+        }
+        
+        .usage-section {
+            background: rgba(255, 0, 255, 0.05);
+            border: 1px solid rgba(255, 0, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+        }
+        
+        .usage-section h2 {
+            color: #ff00ff;
+            margin-bottom: 20px;
+        }
+        
+        .usage-steps {
+            list-style: none;
+            counter-reset: step;
+        }
+        
+        .usage-steps li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            position: relative;
+            padding-right: 60px;
+        }
+        
+        .usage-steps li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #ff00ff, #00d4ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #000;
+        }
+        
+        .usage-steps li h4 {
+            color: #ff00ff;
+            margin-bottom: 5px;
+        }
+        
+        .usage-steps li p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .download-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">⚡</div>
+            <h1>RT News Intelligence</h1>
+            <div class="version">الإصدار 2.0.0</div>
+            <div class="fixed-badge">🚀 نظام البحث الذكي التلقائي</div>
+            <p class="subtitle">نظام ذكي لجمع وإعادة صياغة ونشر الأخبار تلقائياً</p>
+        </div>
+        
+        <div class="features-section">
+            <h2>🌟 المميزات الجديدة</h2>
+            <ul class="features-list">
+                <li>
+                    <span class="feature-icon">🔍</span>
+                    <div class="feature-text">
+                        <h4>بحث تلقائي ذكي</h4>
+                        <p>يبحث ويجلب الأخبار تلقائياً من Google News</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="feature-icon">📰</span>
+                    <div class="feature-text">
+                        <h4>استخراج المحتوى</h4>
+                        <p>يدخل على كل رابط ويستخرج المحتوى والصور</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="feature-icon">🔥</span>
+                    <div class="feature-text">
+                        <h4>إعادة صياغة نارية</h4>
+                        <p>عناوين عاجلة جذابة مع تهويل مقبول</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="feature-icon">📍</span>
+                    <div class="feature-text">
+                        <h4>التاريخ والمكان</h4>
+                        <p>يضيف الدولة والتاريخ تلقائياً</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="feature-icon">🚫</span>
+                    <div class="feature-text">
+                        <h4>منع التكرار</h4>
+                        <p>يفهم المحتوى ويمنع تكرار الأخبار</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="feature-icon">📋</span>
+                    <div class="feature-text">
+                        <h4>قائمة النشر</h4>
+                        <p>إضافة تلقائية للأخبار المعالجة</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="fixes-section">
+            <h2>✅ الإصلاحات</h2>
+            <ul class="fixes-list">
+                <li><span class="check-icon">✓</span> إصلاح مشكلة ES Module vs CommonJS في Electron</li>
+                <li><span class="check-icon">✓</span> إصلاح مشكلة القوائم غير المفعلة (الرئيسية/البحث)</li>
+                <li><span class="check-icon">✓</span> تغيير من BrowserRouter إلى HashRouter للتوافق مع Electron</li>
+                <li><span class="check-icon">✓</span> إضافة أيقونة مخصصة للبرنامج</li>
+                <li><span class="check-icon">✓</span> ملف تثبيت NSIS كامل مع اختصار سطح المكتب</li>
+            </ul>
+        </div>
+        
+        <div class="downloads">
+            <div class="download-card primary">
+                <div class="card-header">
+                    <div class="card-icon installer">💿</div>
+                    <div>
+                        <div class="card-title">ملف التثبيت للويندوز</div>
+                        <div class="card-size">87 ميجابايت - Windows x64</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    ملف تثبيت كامل (NSIS Installer) - فقط اضغط Next Next وسيتم تثبيت البرنامج مع أيقونة على سطح المكتب وقائمة ابدأ.
+                </p>
+                <a href="RT%20News%20Intelligence%20Setup%202.0.0.exe" class="download-btn primary">
+                    ⬇️ تحميل ملف التثبيت
+                </a>
+            </div>
+            
+            <div class="download-card">
+                <div class="card-header">
+                    <div class="card-icon source">📦</div>
+                    <div>
+                        <div class="card-title">الكود المصدري (محدث)</div>
+                        <div class="card-size">219 كيلوبايت - Source Code v2</div>
+                    </div>
+                </div>
+                <p class="card-description">
+                    الكود المصدري الكامل للمشروع مع جميع التحديثات الجديدة. يمكنك استخدامه للتطوير أو التعديل في المستقبل.
+                </p>
+                <a href="rt-news-intelligence-source-v2.zip" class="download-btn secondary">
+                    ⬇️ تحميل الكود المصدري
+                </a>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2>📋 تعليمات التثبيت</h2>
+            <ol>
+                <li>قم بتحميل ملف التثبيت (RT News Intelligence Setup 2.0.0.exe)</li>
+                <li>قد يظهر تحذير من Windows Defender - اضغط "More info" ثم "Run anyway"</li>
+                <li>اتبع خطوات التثبيت (Next → Next → Install)</li>
+                <li>سيتم إنشاء اختصار على سطح المكتب وفي قائمة ابدأ</li>
+                <li>شغل البرنامج واستمتع! 🎉</li>
+            </ol>
+            
+            <div class="note">
+                ⚠️ <strong>ملاحظة:</strong> البرنامج غير موقع رقمياً، لذا قد يظهر تحذير من Windows SmartScreen. هذا طبيعي للبرامج غير الموقعة.
+            </div>
+        </div>
+        
+        <div class="usage-section">
+            <h2>🎯 طريقة الاستخدام</h2>
+            <ul class="usage-steps">
+                <li>
+                    <h4>إضافة مفتاح API</h4>
+                    <p>اذهب لصفحة "مفاتيح API" وأضف مفتاح Gemini أو Groq (مجاني من Google AI Studio)</p>
+                </li>
+                <li>
+                    <h4>البحث عن الأخبار</h4>
+                    <p>اذهب لصفحة "البحث" واكتب كلمة البحث مثل "أخبار غزة" أو "الشرق الأوسط"</p>
+                </li>
+                <li>
+                    <h4>اضغط "بحث ومعالجة تلقائية"</h4>
+                    <p>سيقوم البرنامج بجلب الأخبار، استخراج المحتوى، وإعادة صياغتها تلقائياً</p>
+                </li>
+                <li>
+                    <h4>راجع قائمة النشر</h4>
+                    <p>ستجد جميع الأخبار المعالجة في قائمة النشر جاهزة للنشر</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
