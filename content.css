@@ -1,0 +1,34 @@
+/* RT News Intelligence - Content Styles */
+
+#rt-news-float-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #00f3ff, #ff00ff);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 999999;
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+#rt-news-float-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(0, 243, 255, 0.7);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+  }
+}

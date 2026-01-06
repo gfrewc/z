@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RT News Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <div>
+          <h1>RT News</h1>
+          <p>Intelligence</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tabs -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="extract">استخراج</button>
+      <button class="tab" data-tab="queue">قائمة النشر</button>
+      <button class="tab" data-tab="settings">الإعدادات</button>
+    </nav>
+
+    <!-- Extract Tab -->
+    <div id="extract-tab" class="tab-content active">
+      <div class="current-page">
+        <h3>الصفحة الحالية</h3>
+        <p id="page-title">جاري التحميل...</p>
+        <p id="page-url" class="url"></p>
+      </div>
+
+      <button id="extract-btn" class="btn btn-primary">
+        <span class="btn-icon">📰</span>
+        استخراج الخبر
+      </button>
+
+      <div id="extracted-content" class="extracted hidden">
+        <h3>المحتوى المستخرج</h3>
+        <div class="form-group">
+          <label>العنوان</label>
+          <input type="text" id="news-title" class="input">
+        </div>
+        <div class="form-group">
+          <label>الوصف</label>
+          <textarea id="news-description" class="input" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label>المحتوى</label>
+          <textarea id="news-content" class="input" rows="4"></textarea>
+        </div>
+        <div id="news-image-container" class="image-container hidden">
+          <img id="news-image" src="" alt="">
+        </div>
+        
+        <div class="actions">
+          <button id="rewrite-btn" class="btn btn-secondary">
+            <span class="btn-icon">✨</span>
+            إعادة صياغة
+          </button>
+          <button id="add-queue-btn" class="btn btn-success">
+            <span class="btn-icon">➕</span>
+            إضافة للقائمة
+          </button>
+        </div>
+      </div>
+
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>جاري المعالجة...</p>
+      </div>
+    </div>
+
+    <!-- Queue Tab -->
+    <div id="queue-tab" class="tab-content">
+      <div class="queue-header">
+        <h3>قائمة النشر</h3>
+        <span id="queue-count" class="badge">0</span>
+      </div>
+      
+      <div id="queue-list" class="queue-list">
+        <p class="empty-state">لا توجد منشورات في القائمة</p>
+      </div>
+
+      <div class="queue-actions">
+        <button id="publish-all-btn" class="btn btn-primary" disabled>
+          <span class="btn-icon">🚀</span>
+          نشر الكل
+        </button>
+      </div>
+    </div>
+
+    <!-- Settings Tab -->
+    <div id="settings-tab" class="tab-content">
+      <div class="settings-section">
+        <h3>مفتاح API</h3>
+        <div class="form-group">
+          <label>المزود</label>
+          <select id="api-provider" class="input">
+            <option value="gemini">Google Gemini</option>
+            <option value="groq">Groq</option>
+            <option value="huggingface">HuggingFace</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>المفتاح</label>
+          <input type="password" id="api-key" class="input" placeholder="أدخل مفتاح API">
+        </div>
+        <button id="save-api-btn" class="btn btn-secondary">
+          <span class="btn-icon">💾</span>
+          حفظ
+        </button>
+      </div>
+
+      <div class="settings-section">
+        <h3>حساب Telegram</h3>
+        <div class="form-group">
+          <label>Bot Token</label>
+          <input type="password" id="telegram-token" class="input" placeholder="Bot Token">
+        </div>
+        <div class="form-group">
+          <label>Chat ID</label>
+          <input type="text" id="telegram-chat" class="input" placeholder="Chat ID">
+        </div>
+        <button id="save-telegram-btn" class="btn btn-secondary">
+          <span class="btn-icon">💾</span>
+          حفظ
+        </button>
+        <button id="test-telegram-btn" class="btn btn-outline">
+          <span class="btn-icon">🔗</span>
+          اختبار
+        </button>
+      </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div id="status-bar" class="status-bar hidden">
+      <span id="status-message"></span>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
